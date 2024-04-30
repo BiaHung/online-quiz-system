@@ -3,13 +3,14 @@
 		include("includes/sidebar.php"); 
 		include("../conn.php");
 		$id=$_GET["q"];
-		$result = mysqli_query($conn,"SELECT  id,name,subject,class,ins FROM exams WHERE id=$id;");
+		$result = mysqli_query($conn,"SELECT  id,name,subject,class,ins,ttime FROM exams WHERE id=$id;");
 		$row = mysqli_fetch_row($result);
 		$eid=$row[0];	
 		$subject=$row[2];
 		$name=$row[1];
 		$class=$row[3];
 		$ins=$row[4];
+		$ttime = $row[5];
 		$query = "SELECT * FROM squestions WHERE eid='$eid'"; 
 		$reslt = mysqli_query($conn,$query);
 		$mark=0;
@@ -35,7 +36,7 @@
 <div class="tab-pane fade in active overview-styles" id="overview">
 <div class="row overview-mob"><div class="col-sm-6">
 <div class="row"><div class="col-xs-6 font-bold">Name :</div><div class="col-xs-6"><?php echo $name; ?></div></div>
-<div class="row"><div class="col-xs-6 font-bold">Duration :</div><div class="col-xs-6">00:10:00</div></div>
+<div class="row"><div class="col-xs-6 font-bold">Duration :</div><div class="col-xs-6">00:<?php echo $ttime; ?>:00</div></div>
 <div class="row"><div class="col-xs-6 font-bold">Total mark :</div><div class="col-xs-6"><?php echo $mark;
 																								
 																							?>
