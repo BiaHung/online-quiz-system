@@ -33,7 +33,7 @@
 						$sql = "SELECT tid FROM results where tid='$tid'"; //You don't need a ; like you do in SQL
 						 $res = mysqli_query($conn,$sql);
 						 $rex = mysqli_fetch_row($res);
-						    if($row['id']!=$rex[0])
+						    if(is_null($rex) or ($row['id']!=$rex[0]))
 							{
 							echo "<tr><td hidden>" . $row['id'] . "</td><td>" . $row['name'] . "</td><td>" . $row['subject'] . "</td><td>" . $row['class'] . "</td><td><div class='field-actions'><div class='btn-group'>
 							<form action='preview_exam.php' method='GET'>
