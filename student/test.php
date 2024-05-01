@@ -2,20 +2,21 @@
 session_start();
 $min=$_SESSION['min'];
 $sec=$_SESSION['sec'];
-$sid=$_SESSION['idhotel'];
+$sid=$_SESSION['id'];
 $class=$_SESSION['class'];
 $total=$_SESSION['total'];
 $_SESSION['min']=0;
 $_SESSION['sec']=0;
 		include("../conn.php");		
 		$id=$_GET["q"];
-		$result = mysqli_query($conn,"SELECT  id,name,subject,class,ins,ttime FROM exams WHERE id=$id;");
+		$result = mysqli_query($conn,"SELECT id,name,subject,class,ins,ttime,tid FROM exams WHERE id=$id;");
 		$row = mysqli_fetch_row($result);
 		$eid=$row[0];	
 		$subject=$row[2];
 		$tname=$row[1];
 		$class=$row[3];
 		$time=(int)$row[5];
+        $tid = $row[6];
 		$time=$time*100;
 		$fresh=1;
 		//echo '<script>alert("'.$time.'");</script>';
@@ -24,7 +25,7 @@ $_SESSION['sec']=0;
 		$reslt = mysqli_query($conn,$query);
 		if($_SESSION['fresh']==0)
 		{
-		$sql = "INSERT INTO results (tid, tname, sid, marks, class, subject, per, status ) VALUES ('$eid', '$tname', '$sid', '0','$class', '$subject', '0','Fail')";
+		$sql = "INSERT INTO results (tid, tname, sid, marks, class, subject, per, status ) VALUES ('$tid', '$tname', '$sid', '0','$class', '$subject', '0','Fail')";
 		mysqli_query($conn, $sql);
 		}
 		$_SESSION['fresh']=1;
