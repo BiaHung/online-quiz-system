@@ -33,9 +33,9 @@ else
 	$count=mysqli_num_rows($result);
 	if($count==1){
 	while($row = mysqli_fetch_array($result)) {
-     $id=$row['name'];
+     $name=$row['name'];
 	 $class=$row['course'];
-	  $ids=$row['id'];
+	  $id=$row['id'];
 }
 	session_start();
 if(isset($_SESSION['idhotel'])){
@@ -44,7 +44,7 @@ header("location:login.html");
 }
 else{
 	session_start();
-	$_SESSION["idhotel"] =$id;
+	$_SESSION["idhotel"] =$name;
 	$_SESSION["id"] =$id;
 	$_SESSION["class"] =$class;
 		header("location:student/dashboard.php");
