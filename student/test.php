@@ -25,7 +25,7 @@ $_SESSION['sec']=0;
 		$reslt = mysqli_query($conn,$query);
 		if($_SESSION['fresh']==0)
 		{
-		$sql = "INSERT INTO results (tid, tname, sid, marks, class, subject, per, status ) VALUES ('$tid', '$tname', '$sid', '0','$class', '$subject', '0','Fail')";
+		$sql = "INSERT INTO results (tid, tname, sid, marks, class, subject, per, status ) VALUES ('$eid', '$tname', '$sid', '0','$class', '$subject', '0','Fail')";
 		mysqli_query($conn, $sql);
 		}
 		$_SESSION['fresh']=1;
