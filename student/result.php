@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); 
 		include("includes/sidebar.php"); 
-		$sid=$_SESSION['idhotel'];
+		$sid=$_SESSION['id'];
 		include("../conn.php");
 		$query = "SELECT * FROM results WHERE sid='$sid'"; //You don't need a ; like you do in SQL
 		$result = mysqli_query($conn,$query);
