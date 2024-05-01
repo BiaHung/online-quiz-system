@@ -9,7 +9,7 @@ $tname=$_POST['tname'];
 $tq=$_POST['tq'];
 $subject=$_POST['subject'];
 $per=0;
-$sid=$_SESSION['idhotel'];
+$sid=$_SESSION['id'];
 $class=$_SESSION['class'];
 $total=$_SESSION['total'];
 $gmarks=0; 
@@ -35,8 +35,7 @@ if($per>49)
 	$status="Pass";
 else
 	$status="Fail";
-//echo $tid, $sid, $subject, $gmarks, $per, $status;
-$sql = "UPDATE results SET marks='$gmarks', per='$per', status='$status' WHERE tname='$tname' AND tid='$tid' AND subject='$subject' AND sid='$sid'";
+$sql = "UPDATE results SET marks='$gmarks', per='$per', status='$status' WHERE tid='$tid' AND subject='$subject' AND sid='$sid'";
 mysqli_query($conn, $sql);
 echo("Error description: " . mysqli_error($conn));
 }
