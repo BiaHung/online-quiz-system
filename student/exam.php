@@ -1,11 +1,11 @@
 <?php 
-		include("includes/header.php");
-		include("includes/sidebar.php"); 
-		include("../conn.php");
-		$id=$_SESSION['id'];
-		$class=$_SESSION['class'];
-		$query = "SELECT * FROM exams where class='$class'"; //You don't need a ; like you do in SQL
-		$result = mysqli_query($conn,$query);	
+	include("includes/header.php");
+	include("includes/sidebar.php"); 
+	include("../conn.php");
+	$id=$_SESSION['id'];
+	$class=$_SESSION['class'];
+	$query = "SELECT * FROM exams where class='$class'"; //You don't need a ; like you do in SQL
+	$result = mysqli_query($conn,$query);	
 ?>
 <div class="content-main"><div class="container-fluid">
 <div class="row">
@@ -23,26 +23,23 @@
 <thead><tr>
 <th>Name</th>
 <th>Subject</th>
-<th>Time</th>
+<th>Time(mins)</th>
 <th>Actions</th>
 </tr></thead>
 <tbody>
 <?php
-					while($row = mysqli_fetch_array($result)){
-						$tid=$row['id'];
-						$sql = "SELECT tid FROM results where tid='$tid'"; //You don't need a ; like you do in SQL
-						 $res = mysqli_query($conn,$sql);
-						 $rex = mysqli_fetch_row($res);
-						    if(is_null($rex) or ($row['id']!=$rex[0]))
-							{
-							echo "<tr><td hidden>" . $row['id'] . "</td><td>" . $row['name'] . "</td><td>" . $row['subject'] . "</td><td>" . $row['class'] . "</td><td><div class='field-actions'><div class='btn-group'>
-							<form action='preview_exam.php' method='GET'>
-							<button  onclick='myFunction()' name='q' value=" .$row['id'] . " type='submit' class='btn btn-success'  type='button'>Attempt</button></td></form></div></div>
-							</td></tr>";  //$row['index'] the index here is a field name
-							} 
-					
-					}
-				?>
+	while($row = mysqli_fetch_array($result)){
+		$tid=$row['id'];
+		$sql = "SELECT * FROM results where sid='$id'"; //You don't need a ; like you do in SQL
+		$res = mysqli_query($conn,$sql);
+		if (mysqli_num_rows($res) <= 0) {
+			echo "<tr><td hidden>" . $row['id'] . "</td><td>" . $row['name'] . "</td><td>" . $row['subject'] . "</td><td>" . $row['ttime'] . "</td><td><div class='field-actions'><div class='btn-group'>
+			<form action='preview_exam.php' method='GET'>
+			<button  onclick='myFunction()' name='q' value=" .$row['id'] . " type='submit' class='btn btn-success'  type='button'>Attempt</button></td></form></div></div>
+			</td></tr>";  //$row['index'] the index here is a field name
+		} 
+	}
+?>
 
 </tbody>
 
